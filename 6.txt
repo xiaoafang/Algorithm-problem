@@ -1,0 +1,63 @@
+输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
+
+两个链表，先比较第一个节点，把节点小的插入到新节点的头部，cur++;保存节点的尾部，一次循环
+按位比较，知道有一条链表为空，直接把另一条拼接到新链表的后面
+class Solution {
+public:
+    ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
+    {
+        if(pHead1==NULL)
+            return pHead2;
+        if(pHead2==NULL)
+            return pHead1;
+        ListNode *cur1=pHead1;
+        ListNode *cur2=pHead2;
+        ListNode *new_head=NULL;
+        ListNode *new_tail=NULL;
+        if(cur1->val < cur2->val)
+        {
+            new_head=cur1;
+            cur1=cur1->next;
+
+        }
+        else 
+        {
+            new_head=cur2;
+            cur2=cur2->next;
+
+        }
+        new_tail=new_head;
+        while(cur1!=NULL && cur2!=NULL)
+        {
+            if(cur1->val<cur2->val)
+            {
+                new_tail->next=cur1;
+                new_tail=cur1;
+                cur1=cur1->next;
+
+            }
+            else
+            {
+                new_tail->next=cur2;
+                new_tail=cur2;
+                cur2=cur2->next;
+
+            }
+
+        }
+        if(cur1!=NULL)
+        {
+            new_tail->next=cur1;
+
+        }
+        if(cur2!=NULL)
+        {
+            new_tail->next=cur2;
+
+        }
+        return new_head;
+
+    }
+
+};
+
