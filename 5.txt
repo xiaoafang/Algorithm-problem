@@ -1,0 +1,25 @@
+输入一个链表，输出该链表中倒数第k个结点
+快指针先走k步，然后慢指针和快指针一起走，如果快指针先走时为空则直接返回
+class Solution {
+public:
+    ListNode* FindKthToTail(ListNode* pListHead, unsigned int k) {
+        if(pListHead==NULL||k<=0)
+            return NULL;
+        ListNode *fast=pListHead;
+        ListNode *slow=pListHead;
+        while(k--)
+        {  
+            if(fast==NULL)
+                return NULL;
+            fast=fast->next;
+
+        }
+        while(fast!=NULL)
+        {
+            fast=fast->next;
+            slow=slow->next;
+
+        }
+        return slow;
+    }
+};
